@@ -13,29 +13,29 @@ and open the template in the editor.
     </head>
     <body>
         <div id="app">
-            <label>Prénom</label>
-            <input v-model="prenom">
-            <label>Nom</label>
-            <input v-model="nom">
+            <label>Nouveau pays</label>
+            <input v-model='nouveauPays'>
+            <button v-on:click='ajouterPays'>Ajouter</button>
+            {{ mesPays }}
             <br>
-            {{ prenom + ' ' + nom }}
-            <div v-if="prenom=='Dwayne' && nom=='Johnson'">
-                Salut champion ; )
-            </div>
-            <div v-else-if="prenom=='Daniel' && nom=='Craig'">
-                Oh James..
-            </div>
-            <div v-else>
-                Salut bel inconnu..
-            </div>
+            <select>
+                <option v-for='paysAct in mesPays' :value="paysAct">{{ paysAct }}</option>
+            </select>
         </div>
     </body>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                prenom: 'Charlotte',
-                nom: 'Rampling'
+                nouveauPays: '',
+                mesPays: []
+            },
+            methods: {
+                ajouterPays: function(){
+                    this.mesPays.push( this.nouveauPays );
+                    this.mesPays.sort();// ; )
+                    this.nouveauPays = '';
+                }
             }
         });
     </script>
