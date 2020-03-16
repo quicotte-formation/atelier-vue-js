@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <label>Nouveau pays</label>
+            <input v-model='nouveauPays' v-on:keyup.enter='ajouterPays'>
+            <button v-on:click='ajouterPays'>Ajouter</button>
+            {{ mesPays }}
+            <br>
+            <select v-on:change='paysSelected' v-model='paysSelectionne'>
+                <option v-for='paysAct in mesPays' :value="paysAct">{{ paysAct }}</option>
+            </select>
+            {{ paysSelectionne }}
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                nouveauPays: '',
+                mesPays: [],
+                paysSelectionne: ''
+            },
+            methods: {
+                paysSelected: function(){
+                    console.log( this.paysSelectionne );
+                },
+                ajouterPays: function(){
+                    this.mesPays.push( this.nouveauPays );
+                    this.mesPays.sort();// ; )
+                    this.nouveauPays = '';
+                }
+            }
+        });
+    </script>
+</html>
