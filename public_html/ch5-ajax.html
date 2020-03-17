@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button v-on:click="charger">Chargez données json via AJAX</button>
+            <div>{{ donnees }}</div>
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                donnees: ''
+            },
+            methods: {
+                charger: function(){
+                    /* Le param des fonctions 'then' et 'catch'
+                     * sont des fonctions fléchées.
+                     * Dans une fonction standard, l'utilisation du 'this' désigne
+                     * l'objet qui appelle la fonction (ici l'objet window de la fenêtre actuelle!)
+                     * Dans une fonction fléchée, 'this' désigne l'objet qui définit
+                     * la fonction (l'objet vue)
+                     */
+                    axios.get('ch5-ajax.json').then( (resp) => {
+                        console.log( this );
+                        this.donnees = resp.data;
+                    } ).catch( (resp) => { 
+                        this.donnees = 'ERREUR RESEAU';
+                        console.log( resp );
+                    });
+                }
+            }
+        });
+    </script>
+</html>
